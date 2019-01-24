@@ -1,0 +1,39 @@
+.app {
+  text-align: center;
+  background-color: #222;
+  min-height: 100vh;
+  display: flex;
+}
+
+.logo-container{
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.logo {
+  animation: app-logo-shake infinite 2s cubic-bezier(.36,.07,.19,.97) both;
+  width:70%;
+}
+
+
+@keyframes app-logo-shake {
+  10%, 90% {
+    transform: translate3d(-20px, 5px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, -6px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 1px, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 8px, 0);
+  }
+}
