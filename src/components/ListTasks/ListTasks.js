@@ -2,15 +2,11 @@ import React from "react";
 import "./ListTasks.css"
 
 class ListTasks extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
     render() {
         return (
-            <div className="task-item">
+            <div className="task">
                 <img
-                    src={require("../../images/logo2.png")}
+                    src={require("../../images/list-icon.png")}
                     className="img"
                     alt={this.props.taskItem}
                 />
