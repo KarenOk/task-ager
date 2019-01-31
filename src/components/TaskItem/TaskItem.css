@@ -1,0 +1,47 @@
+.task-item{
+    background-color: rgb(66, 74, 104);
+    width: 85%;
+    margin: 1% auto;
+    padding: 0.5% 2%;
+    border-radius: 5px;
+}
+
+.task-item p{
+    color: white;
+    font-size: 16px;
+}
+
+.task-item .done{
+    text-decoration: line-through;
+}
+
+.task-item .extras{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 0;
+}
+
+ .task-item .buttons{
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.task-item .buttons > *{
+   width: 30px;
+   height: 30px;
+   margin: 1%;
+   padding: 1%;
+   cursor: pointer;
+}
+
+.task-item .extras span{
+    
+    text-align: end; 
+    color: rgb(158, 179, 165, 0.4);
+    font-size: 13px;
+}
+
+
