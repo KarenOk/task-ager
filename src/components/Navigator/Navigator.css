@@ -1,9 +1,14 @@
 .navigator{
-    position: fixed;
     width: 40%;
     max-width: 350px;
     height: 100vh;
-    background-color: #88b7b5;
+    background-color: #4F5D75;
+    /* font-family: 'Bree Serif', serif; */
+    /* font-family: 'Asap', sans-serif; */
+    font-family: 'Averia Libre', cursive;
+    /* font-family: 'Podkova', serif; */
+    font-size: 18px;
+    font-weight: 100;
     overflow-y: scroll;
     overflow-x: hidden;
 }
