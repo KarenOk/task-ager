@@ -2,7 +2,7 @@ import React from "react";
 import ListTasks from "../ListTasks/ListTasks";
 import "./Navigator.css";
 
-class App extends React.Component {
+class Navigator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,8 +19,12 @@ class App extends React.Component {
                     alt="logo"
                 />
 
-                {this.state.tasks.map(task => {
-                    return <ListTasks taskItem={task} />
+                {this.state.tasks.map((task, index) => {
+                    return <ListTasks taskItem={task} key={index} />
+                })}
+
+                {this.state.tasks.map((task, index) => {
+                    return <ListTasks taskItem={task} key={index} />
                 })}
 
                 <div className="add-task">
@@ -36,4 +40,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default Navigator;
