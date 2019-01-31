@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./images/logo4.svg";
-import Home from "./components/Home/Home"
+import Home from "./components/Home/Home";
 import "./App.css";
 
 class App extends React.Component {
@@ -13,7 +13,7 @@ class App extends React.Component {
 
   }
 
-  handleHomeMount = (ready) => {
+  handleHomeMount = () => {
     setTimeout(() => {
       this.setState({
         ready: true
@@ -31,13 +31,13 @@ class App extends React.Component {
 
   welcomePage = () => {
     return (
-        <div className="welcome-page">
-          <img
-            src={logo}
-            className="logo"
-            alt="logo"
-            onAnimationEnd={this.handleHomeMount}
-          />
+      <div className="welcome-page">
+        <img
+          src={logo}
+          className="logo"
+          alt="logo"
+          onAnimationEnd={this.handleHomeMount}
+        />
       </div>
     );
   }
