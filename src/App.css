@@ -1,6 +1,8 @@
 .app {
   min-height: 100vh;
   display: flex;
+  font-family: 'Averia Libre', cursive;
+
 }
 
 .welcome-page{
