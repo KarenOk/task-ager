@@ -1,0 +1,17 @@
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #f4ecd6;
+    padding: 0 8% 0 5%;
+}
+
+.task-item img:first-of-type{
+   width: 40px;
+   height: 40px;
+}
+
+.task-item img:last-of-type{
+    width: 20px;
+   height: 20px;
+}

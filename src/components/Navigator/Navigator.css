@@ -1,0 +1,28 @@
+.navigator{
+    position: fixed;
+    width: 40%;
+    max-width: 350px;
+    height: 100vh;
+    background-color: #88b7b5;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+.navigator .logo{
+    padding: 30px 10px;
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.navigator .add-task{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigator .add-task img{
+    width: 25px;
+    padding: 10px;
+}
