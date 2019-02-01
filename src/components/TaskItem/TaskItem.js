@@ -9,6 +9,10 @@ class TaskItem extends React.Component {
         }
     }
 
+    handleCheck = (e) => {
+        this.props.handleItemCheck(e.target.checked);
+    }
+
     showOverlay = () => {
         this.setState({
             showOverlay: true
@@ -28,6 +32,7 @@ class TaskItem extends React.Component {
                     type="checkbox"
                     name="select-all"
                     checked={this.props.item.done}
+                    onChange={this.props.handleItemCheck}
                     className="select-all"
                 />
                 <img
