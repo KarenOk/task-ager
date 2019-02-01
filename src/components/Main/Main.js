@@ -30,11 +30,14 @@ class Main extends React.Component {
         return (
             <div className="main">
                 <Navigator />
+
                 <div className="body">
                     <TaskHeader />
+
                     {this.state.all.notes.map((note, index) => {
                         return <TaskItem item={note} key={index} />
                     })}
+
                 </div>
             </div>
         );

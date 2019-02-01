@@ -1,5 +1,6 @@
 .main {
-    background-color: rgb(225, 236, 229);
+    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(225, 236, 229); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -11,4 +12,6 @@
 
 .main .body{
     flex: 1;
+    height: 100vh;
+    overflow-y: scroll;
 }
