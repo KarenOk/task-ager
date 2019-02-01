@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import logo from "./images/logo4.svg";
 import Main from "./components/Main/Main";
 import "./App.css";
@@ -45,7 +46,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.ready ? <this.mainPage /> : <this.welcomePage />}
+        <Switch>
+          <Route exact path="/" render={props => (
+            this.state.ready ? <this.mainPage /> : <this.welcomePage />
+          )} />
+          <Route path="/tasks" component={this.mainPage} />
+        </Switch>
       </div>
     );
   }
