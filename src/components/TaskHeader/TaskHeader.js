@@ -13,19 +13,27 @@ class TaskHeader extends React.Component {
                         alt={this.props.task}
                     />
 
-                    <h1> Groceries </h1>
+                    <h1> {this.props.taskName} </h1>
 
                 </div>
 
                 <div className="right">
-                    <input type="checkbox" name="select-all" className="select-all" />
+                    <input
+                        type="checkbox"
+                        name="select-all"
+                        className="select-all"
+                        title="Check All"
+                        onChange={this.props.handleCheckAll}
+                    />
                     <img
                         src={require("../../images/add-icon.png")}
+                        title="Add Item"
                         className="icon"
                         alt={this.props.task}
                     />
                     <img
                         src={require("../../images/delete.png")}
+                        title="Delete Task"
                         className="icon"
                         alt={this.props.task}
                     />
