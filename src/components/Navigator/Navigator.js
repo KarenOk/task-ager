@@ -6,8 +6,28 @@ class Navigator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: ["All", "Groceries", "School", "Work"]
+            tasks: ["All", "Groceries", "School", "Work"],
+            newTask: ""
         }
+    }
+
+    handleNewTask = (e) => {
+        this.setState({
+            newTask: e.target.value
+        });
+    }
+
+    handleSaveTask = (e) => {
+        if (e.keyCode !== 13 || !this.state.newTask) return;
+
+        this.state.tasks.splice(1, 0, this.capitalize(this.state.newTask));
+        this.setState({
+            newTask: ""
+        });
+    }
+
+    capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     render() {
@@ -19,21 +39,19 @@ class Navigator extends React.Component {
                     alt="logo"
                 />
 
-                {this.state.tasks.map((task, index) => {
-                    return <ListTasks taskItem={task} key={index} />
-                })}
-
-                {this.state.tasks.map((task, index) => {
-                    return <ListTasks taskItem={task} key={index} />
-                })}
-
                 <div className="add-task">
-                    <img
-                        src={require("../../images/add-icon.png")}
-                        alt="New Task"
+                    <input
+                        name="new-task"
+                        placeholder="New Task"
+                        onKeyUp={this.handleSaveTask}
+                        onChange={this.handleNewTask}
+                        value={this.state.newTask}
                     />
-                    <h3> New Task </h3>
                 </div>
+
+                {this.state.tasks.map((task, index) => {
+                    return <ListTasks taskItem={task} key={index} />
+                })}
 
             </div>
         );
