@@ -8,6 +8,10 @@
     position: relative;
 }
 
+.task-item.due{
+    border: 2px solid rgb(240, 1, 1);
+}
+
 .task-item p{
     color: white;
     font-size: 16px;
@@ -41,5 +45,7 @@
     color: rgb(158, 179, 165, 0.7);
     font-size: 13px;
 }
+
+
 
 
