@@ -44,6 +44,7 @@ class Main extends React.Component {
     handleItemCheck = (index, task, e) => {
         const copy = { ...this.state[task] }; // Spread original object into new object
         copy.notes[index].done = e.target.checked;
+        
         this.setState({
             [task]: copy // Set dynamic object key
         });
@@ -103,7 +104,7 @@ class Main extends React.Component {
                         <TaskItem
                             item={note}
                             key={index}
-                            handleItemCheck={this.handleItemCheck.bind(this, index)}
+                            handleItemCheck={this.handleItemCheck.bind(this, index, task)}
                         />
                     );
                 })}
