@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router";
 import logo from "./images/logo4.svg";
 import Main from "./components/Main/Main";
 import "./App.css";
@@ -9,7 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      ready: false
+      redirect: false
     }
 
   }
@@ -17,17 +18,9 @@ class App extends React.Component {
   handleMainMount = () => {
     setTimeout(() => {
       this.setState({
-        ready: true
+        redirect: true
       });
     }, 1000);
-  }
-
-  mainPage = () => {
-    return (
-      <div className="main-page">
-        <Main handleMount={this.handleMainMount} />
-      </div>
-    );
   }
 
   welcomePage = () => {
@@ -46,12 +39,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
+
         <Switch>
-          <Route exact path="/" render={props => (
-            this.state.ready ? <this.mainPage /> : <this.welcomePage />
-          )} />
-          <Route path="/tasks" component={this.mainPage} />
+          <Route exact path="/" component={this.welcomePage} />
+          <Route path="/tasks" component={Main} />
         </Switch>
+
+        {this.state.redirect ? <Redirect to="/tasks/all" /> : <div />}
       </div>
     );
   }
