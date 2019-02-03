@@ -41,10 +41,29 @@ class Main extends React.Component {
         }
     }
 
-    handleItemCheck = (index, task, e) => {
+
+    handleDeleteItem = (index, task) => {
         const copy = { ...this.state[task] }; // Spread original object into new object
-        copy.notes[index].done = e.target.checked;
+        copy.notes.splice(index, 1);
         
+        this.setState({
+            [task]: copy // Set dynamic object key
+        });
+    }
+
+    handleEditItem = (index, task, newNote) => {
+        const copy = { ...this.state[task] }; // Spread original object into new object
+        copy.notes[index].note = newNote;
+        
+        this.setState({
+            [task]: copy // Set dynamic object key
+        });
+    }
+
+    handleItemCheck = (index, task, check) => {
+        const copy = { ...this.state[task] }; // Spread original object into new object
+        copy.notes[index].done = check;
+
         this.setState({
             [task]: copy // Set dynamic object key
         });
@@ -52,10 +71,12 @@ class Main extends React.Component {
 
     handleCheckAll = (e) => {
         Object.keys(this.state).forEach(task => {
-            const copy = { ...this.state[task] }; // Spread original object into new object
+            const copy = { ...this.state[task] };
+
             copy.notes.forEach(note => {
                 note.done = e.target.checked;
             });
+
             this.setState({
                 [task]: copy
             });
@@ -80,6 +101,8 @@ class Main extends React.Component {
                                         item={note}
                                         key={key}
                                         handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+                                        handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
+                                        handleEditItem={this.handleEditItem.bind(this, index, task)}
                                     />
                                 );
                             })
@@ -95,6 +118,7 @@ class Main extends React.Component {
     renderTask = (props) => {
         let task = props.match.params.taskName;
         if (!this.state[task]) return <div/>;
+        
         return (
             <div className="body">
                 <TaskHeader handleCheckAll={this.handleCheckAll} taskName={this.state[task].title} />
@@ -105,6 +129,8 @@ class Main extends React.Component {
                             item={note}
                             key={index}
                             handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+                            handleDelete={this.handleDeleteItem.bind(this, index, task)}
+                            handleEditItem={this.handleEditItem.bind(this, index, task)}
                         />
                     );
                 })}
