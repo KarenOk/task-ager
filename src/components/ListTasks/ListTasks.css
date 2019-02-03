@@ -4,11 +4,15 @@
     justify-content: space-between;
     color: #f4ecd6;
     padding: 0 8% 0 5%;
-    cursor: pointer;
+    opacity: 0.4;
 }
 
 .task:hover {
-    opacity: 0.7;
+    opacity: 0.9;
+}
+
+.active .task {
+    opacity: 1;
 }
 
 .task img:first-of-type{
