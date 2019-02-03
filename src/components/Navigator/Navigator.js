@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
 import "./Navigator.css";
 
@@ -6,7 +7,7 @@ class Navigator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: ["All", "Groceries", "School", "Work"],
+            tasks: ["All", "Groceries", "School", "Work", "Make money"],
             newTask: ""
         }
     }
@@ -30,6 +31,10 @@ class Navigator extends React.Component {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    linkify = (taskName) => {
+        return taskName.split(" ").map(item => item.toLowerCase()).join("-");
+    }
+
     render() {
         return (
             <div className="navigator">
@@ -49,9 +54,23 @@ class Navigator extends React.Component {
                     />
                 </div>
 
-                {this.state.tasks.map((task, index) => {
-                    return <ListTasks taskItem={task} key={index} />
-                })}
+                <nav>
+                    {
+                        this.state.tasks.map((task, index) => {
+                            return (
+                                <NavLink
+                                    exact
+                                    to={"/tasks/" + this.linkify(task)}
+                                    key={index}
+                                    activeClassName="active"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <ListTasks taskItem={task} />
+                                </NavLink>
+                            );
+                        })
+                    }
+                </nav>
 
             </div>
         );
