@@ -1,6 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { Redirect } from "react-router";
+import { Switch, Route,  Redirect} from "react-router-dom";
 import logo from "./images/logo4.svg";
 import Main from "./components/Main/Main";
 import "./App.css";
