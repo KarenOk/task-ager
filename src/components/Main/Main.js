@@ -119,7 +119,6 @@ class Main extends React.Component {
                 <Navigator />
 
                 <Switch>
-                    <Route exact path="/" component={this.renderAll} />
                     <Route exact path="/tasks" component={this.renderAll} />
                     <Route exact path="/tasks/all" component={this.renderAll} />
                     <Route path="/tasks/:taskName" render={props => <this.renderTask {...props} />} />

@@ -33,7 +33,24 @@
 }
 
 
-.task-header .right > *{
+.task-header .right .icon{
     width: 30px;
     height: 30px;
+}
+
+.task-item input[type=checkbox],
+.task-header .right input[type=checkbox]{
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #DFDFDF;
+    background-image: linear-gradient(white 0%, #DEDEDE 100%);
+    border-radius: 1px;
+}
+
+.task-item input[type=checkbox]:checked,
+.task-header .right input[type=checkbox]:checked{
+    background-image: url("../../images/check.png"), linear-gradient(white 0%, #DEDEDE 100%);
+    background-size: 28px;
+
 }
