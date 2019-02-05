@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
-import Navigator from "../Navigator/Navigator";
+import Nav from "../Nav/Nav";
 import TaskHeader from "../TaskHeader/TaskHeader";
 import TaskItem from "../TaskItem/TaskItem";
 import "./Main.css"
@@ -188,7 +188,7 @@ class Main extends React.Component {
     render() {
         return (
             <div className="main">
-                <Navigator />
+                <Nav />
 
                 <DragDropContext onDragEnd={this.onItemDragEnd}>
                     <Switch>

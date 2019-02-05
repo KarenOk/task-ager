@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
-import "./Navigator.css";
+import "./Nav.css";
 
-class Navigator extends React.Component {
+class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -88,4 +88,4 @@ class Navigator extends React.Component {
     }
 }
 
-export default Navigator;
+export default Nav;
