@@ -18,6 +18,15 @@ class Navigator extends React.Component {
         });
     }
 
+    handleEditTask = (index, e) => {
+        const copy = [...this.state.tasks];
+        copy[index] = e.target.value;
+        
+        this.setState({
+            tasks: copy
+        });
+    }
+
     handleSaveTask = (e) => {
         if (e.keyCode !== 13 || !this.state.newTask) return;
 
@@ -65,7 +74,7 @@ class Navigator extends React.Component {
                                     activeClassName="active"
                                     style={{ textDecoration: "none" }}
                                 >
-                                    <ListTasks taskItem={task} />
+                                    <ListTasks taskItem={task} handleEdit={this.handleEditTask.bind(this, index)}/>
                                 </NavLink>
                             );
                         })

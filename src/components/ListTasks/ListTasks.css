@@ -15,12 +15,20 @@
     opacity: 1;
 }
 
-.task img:first-of-type{
-   width: 30px;
-   height:30px;
+.task img{
+   width: 25px;
+   height:25px;
 }
 
-.task img:last-of-type{
-    width: 20px;
-   height: 20px;
+.task .edit-task {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    color: inherit;
+    margin: 10% 0;
+    outline: 0;
+    caret-color: white;
 }
