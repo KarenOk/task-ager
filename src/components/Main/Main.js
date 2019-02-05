@@ -161,6 +161,7 @@ class Main extends React.Component {
                         <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}
+                            className="container"
                         >
                             {this.state[task].notes.map((note, index) => {
                                 return (
