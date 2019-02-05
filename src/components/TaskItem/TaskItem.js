@@ -90,6 +90,8 @@ class TaskItem extends React.Component {
 
                                 <textarea
                                     className="edit-area"
+                                    rows="4"
+                                    autoFocus
                                     value={this.props.item.note}
                                     onChange={this.handleEdit}
                                     onBlur={this.stopEdit}
