@@ -50,6 +50,10 @@
    cursor: pointer;
 }
 
+.task-item .buttons .move{
+    cursor: move;
+ }
+
 .task-item span{
     display: block;
     text-align: end; 
