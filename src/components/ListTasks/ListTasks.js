@@ -39,9 +39,12 @@ class ListTasks extends React.Component {
                     !this.state.editing ?
                         <h3> {this.props.taskItem} </h3> :
                         <input
+                            autoFocus
+                            required
                             className="edit-task"
                             value={this.props.taskItem}
-                            autoFocus
+                            type="text"
+                            maxLength="20"
                             onChange={this.props.handleEdit}
                             onKeyUp={this.stopEdit}
                             onBlur={this.stopEdit}
@@ -50,7 +53,7 @@ class ListTasks extends React.Component {
 
                 {
                     this.props.taskItem === "All" ?
-                        <div style={{width: "30px"}}/> :
+                        <div style={{ width: "30px" }} /> :
                         <img
                             src={require("../../images/edit.png")}
                             className="img"

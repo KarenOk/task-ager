@@ -92,6 +92,9 @@ class TaskItem extends React.Component {
                                     className="edit-area"
                                     rows="4"
                                     autoFocus
+                                    required
+                                    type="text"
+                                    maxLength="150"
                                     value={this.props.item.note}
                                     onChange={this.handleEdit}
                                     onBlur={this.stopEdit}

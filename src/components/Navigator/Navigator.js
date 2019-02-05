@@ -21,7 +21,7 @@ class Navigator extends React.Component {
     handleEditTask = (index, e) => {
         const copy = [...this.state.tasks];
         copy[index] = e.target.value;
-        
+
         this.setState({
             tasks: copy
         });
@@ -57,6 +57,8 @@ class Navigator extends React.Component {
                     <input
                         name="new-task"
                         placeholder="New Task"
+                        type="text"
+                        maxLength="20"
                         onKeyUp={this.handleSaveTask}
                         onChange={this.handleNewTask}
                         value={this.state.newTask}
