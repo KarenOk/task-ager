@@ -129,7 +129,7 @@ class Main extends React.Component {
                             item={note}
                             key={index}
                             handleItemCheck={this.handleItemCheck.bind(this, index, task)}
-                            handleDelete={this.handleDeleteItem.bind(this, index, task)}
+                            handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
                             handleEditItem={this.handleEditItem.bind(this, index, task)}
                         />
                     );
