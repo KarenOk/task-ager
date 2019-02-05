@@ -33,9 +33,10 @@
 }
 
 
-.task-header .right .icon{
+.task-header .right > *{
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 .task-item input[type=checkbox],
@@ -43,9 +44,11 @@
     appearance: none;
     width: 30px;
     height: 30px;
-    border: 1px solid #DFDFDF;
+    border: 1px solid #DEDEDE;
+    box-shadow: 0 0 5px rgb(51, 0, 129, 0.6);
     background-image: linear-gradient(white 0%, #DEDEDE 100%);
-    border-radius: 1px;
+    border-radius: 2px;
+    
 }
 
 .task-item input[type=checkbox]:checked,
