@@ -16,7 +16,7 @@ class TaskItem extends React.Component {
     }
 
     stopEdit = (e) => {
-        if (e && e.keyCode !== 13) return;
+        if (e.keyCode && e.keyCode !== 13) return;
 
         this.setState({
             editing: false
@@ -33,7 +33,6 @@ class TaskItem extends React.Component {
 
     handleEdit = (e) => {
         this.props.handleEditItem(e.target.value);
-
     }
 
     overlay = () => {
@@ -70,13 +69,15 @@ class TaskItem extends React.Component {
     render() {
         return (
             <div
-                className="task-item">
+                className="task-item"
+            >
                 {
                     this.state.editing === false ?
                         <p className={this.props.item.done ? "done" : ""}>
                             {this.props.item.note}
-                        </p>
-                        : <textarea
+                        </p>:
+                        
+                        <textarea
                             className="edit-area"
                             value={this.props.item.note}
                             onChange={this.handleEdit}
