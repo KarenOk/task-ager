@@ -1,0 +1,51 @@
+.delete-task .modal{
+    width: 40%;
+    background-color: white;
+    min-width: 200px;
+    box-sizing: border-box;
+    color: black;
+}
+
+.delete-task header{
+    color: rgba(39, 5, 93, 0.8);
+    padding: 10px;
+}
+
+.delete-task header h1{
+    font-weight: 500;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.delete-task p{
+    font-size: 16px;
+    padding: 0 10px 10px;
+    margin-bottom: 0 0 10px;
+}
+
+.delete-task p .task-name{
+    text-transform: capitalize;
+}
+
+.delete-task .buttons{
+    width: 100%;
+}
+
+.delete-task button{
+    width: 50%;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-task button.yes{
+    background-color: rgb(64, 158, 64);
+}
+
+.delete-task button.no{
+    background-color: rgb(172, 56, 56);
+}
