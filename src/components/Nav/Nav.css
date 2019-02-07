@@ -44,10 +44,11 @@
     font-family: inherit;
     border: 1px solid #3a1dc6;
     border-radius: 5px;
+    text-transform: capitalize;
     background: #200054 url("../../images/add-icon.png") no-repeat 97% center;
     background-size: 18px;
 }
 
 .navigator input[name=new-task]:focus{
-    border: 2px solid #4735EA;
+    outline: 2px solid #4735EA;
 }
