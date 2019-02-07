@@ -5,6 +5,7 @@
     color: #f4ecd6;
     padding: 0 8% 0 5%;
     opacity: 0.4;
+    text-transform: capitalize;
 }
 
 .task:hover {

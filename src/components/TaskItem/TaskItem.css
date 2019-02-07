@@ -6,6 +6,7 @@
     padding: 0.5% 2%;
     border-radius: 5px;
     position: relative;
+    max-width: 1150px;
 }
 
 .task-item.due{
@@ -71,6 +72,5 @@
     outline: none;
 }
 
-
-
+/* Checkbox styles within TaskHeader */
 
