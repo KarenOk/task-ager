@@ -101,7 +101,7 @@ class TaskItem extends React.Component {
                                     onKeyUp={this.stopEdit}
                                 />
                         }
-                        <span> Due Date: {this.props.item.dueDate} </span>
+                        <span> Due Date: {new Date(this.props.item.dueDate).toGMTString()} </span>
 
                         <this.overlay {...provided.dragHandleProps}/>
 

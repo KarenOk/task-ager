@@ -27,15 +27,17 @@ class TaskHeader extends React.Component {
                     />
                     <img
                         src={require("../../images/add-icon.png")}
-                        title="Add Item"
+                        title="Add Note"
                         className="icon"
-                        alt={this.props.task}
+                        alt={"Add note to" + this.props.task}
+                        onClick={this.props.toggleAddNote}
                     />
                     <img
                         src={require("../../images/delete.png")}
                         title="Delete Task"
                         className="icon"
-                        alt={this.props.task}
+                        alt={"Delete" + this.props.task}
+                        onClick={this.props.toggleDeleteTask}
                     />
 
                 </div>
