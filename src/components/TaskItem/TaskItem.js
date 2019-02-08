@@ -6,8 +6,33 @@ class TaskItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editing: false
+            editing: false,
+            status: ""
         }
+    }
+
+    componentDidMount() {
+        this.checkDate();
+    }
+
+    checkDate = () => {
+        let status;
+        let now = new Date();
+        let due = new Date(this.props.item.dueDate);
+        let borderLine = new Date(this.props.item.dueDate);
+        borderLine.setDate(borderLine.getDate() - 1);
+
+        if (now >= due) {
+            status = "due";
+        } else if (now >= borderLine && now < due) {
+            status = "due-soon"
+        } else {
+            status = "not-due"
+        }
+
+        this.setState({
+            status: status
+        });
     }
 
     startEdit = () => {
@@ -64,7 +89,7 @@ class TaskItem extends React.Component {
                     alt="Delete"
                     onClick={this.handleDelete}
                 />
-                
+
             </div>
         );
     }
@@ -82,6 +107,13 @@ class TaskItem extends React.Component {
                         className="task-item"
 
                     >
+                        {
+                            !this.props.item.done ?
+                                <div className={`ribbon ${this.state.status}`} >
+                                    <span>{this.state.status.split("-").join(" ")}</span>
+                                </div> : <span />
+                        }
+
                         {
                             this.state.editing === false ?
                                 <p className={this.props.item.done ? "done" : ""}>
@@ -103,7 +135,7 @@ class TaskItem extends React.Component {
                         }
                         <span> Due Date: {new Date(this.props.item.dueDate).toGMTString()} </span>
 
-                        <this.overlay {...provided.dragHandleProps}/>
+                        <this.overlay {...provided.dragHandleProps} />
 
                     </div>
                 )}

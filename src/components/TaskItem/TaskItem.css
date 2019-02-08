@@ -60,8 +60,8 @@
 .task-item span{
     display: block;
     text-align: end; 
-    color: rgb(158, 179, 165, 0.7);
-    font-size: 13px;
+    color: rgba(191, 204, 196, 0.7);
+    font-size: 14px;
 }
 
 .task-item .edit-area{
@@ -70,6 +70,74 @@
     font-size: 14px;
     resize: none;
     outline: none;
+}
+
+/* Ribbon styles */
+
+.task-item .ribbon {
+    position: absolute;
+    right: -5px; top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 70px; height: 70px;
+    text-align: right;
+}
+
+.task-item .ribbon.not-due{
+    display: none;
+}
+
+.task-item .ribbon.due{
+    --color-one : #F70505 ;
+    --color-two: #8F0808;
+    --color-fallback: rgb(196, 15, 15);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.task-item .ribbon.due-soon{
+    --color-one : rgb(5, 78, 247) ;
+    --color-two: rgb(8, 33, 143);
+    --color-fallback: rgb(15, 48, 196);
+    text-transform: capitalize;
+}
+
+
+.task-item .ribbon span {
+    font-size: 10px;
+    color: #FFF;
+    text-align: center;
+    line-height: 15px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 85px;
+    display: block;
+    background: var(--color-fallback);
+    background: linear-gradient(var(--color-one) 0%, var(--color-two) 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 20px; 
+    right: -16px;
+}
+
+.task-item .ribbon span::before {
+    content: "";
+    position: absolute; left: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid var(--color-two);
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid var(--color-two);
+}
+
+.task-item .ribbon span::after {
+    content: "";
+    position: absolute; right: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid var(--color-two);
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid var(--color-two);
 }
 
 /* Checkbox styles within TaskHeader */
