@@ -11,28 +11,20 @@ class TaskItem extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.checkDate();
-    }
-
     checkDate = () => {
-        let status;
         let now = new Date();
         let due = new Date(this.props.item.dueDate);
         let borderLine = new Date(this.props.item.dueDate);
         borderLine.setDate(borderLine.getDate() - 1);
 
         if (now >= due) {
-            status = "due";
+            return "due";
         } else if (now >= borderLine && now < due) {
-            status = "due-soon"
+            return "due-soon"
         } else {
-            status = "not-due"
+            return "not-due"
         }
 
-        this.setState({
-            status: status
-        });
     }
 
     startEdit = () => {
@@ -109,8 +101,10 @@ class TaskItem extends React.Component {
                     >
                         {
                             !this.props.item.done ?
-                                <div className={`ribbon ${this.state.status}`} >
-                                    <span>{this.state.status.split("-").join(" ")}</span>
+                                <div className={`ribbon ${this.checkDate()}`} >
+                                    <span>
+                                        {this.checkDate().split("-").join(" ")}
+                                    </span>
                                 </div> : <span />
                         }
 
