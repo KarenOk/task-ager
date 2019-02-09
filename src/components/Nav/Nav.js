@@ -41,10 +41,11 @@ class Nav extends React.Component {
         const copy = [...this.state.taskNames];
         copy[index] = e.target.value;
 
-        this.setState(
-            { taskNames: copy },
+        this.setState({
+            taskNames: copy
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
     handleDeleteTaskName = () => {
@@ -52,11 +53,11 @@ class Nav extends React.Component {
         const index = this.state.taskNames.findIndex(task => task === currentTask);
         const newTasks = [...this.state.taskNames];
         newTasks.splice(index, 1);
-
-        this.setState(
-            { taskNames: newTasks },
+        this.setState({
+            taskNames: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
 
     }
 
@@ -64,11 +65,11 @@ class Nav extends React.Component {
         if (e.keyCode !== 13 || !this.state.newTask) return;
 
         this.state.taskNames.splice(1, 0, this.capitalize(this.state.newTask));
-        console.log(this.state.taskNames)
-        this.setState(
-            { newTask: "" },
+        this.setState({
+            newTask: ""
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
     capitalize = (string) => {

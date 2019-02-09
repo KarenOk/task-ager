@@ -37,10 +37,11 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState(
-            { tasks: newTasks },
+        this.setState({
+            tasks: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
     handleEditItem = (index, task, newNote) => {
@@ -51,10 +52,11 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState(
-            { tasks: newTasks },
+        this.setState({
+            tasks: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
     handleItemCheck = (index, task, check) => {
@@ -65,10 +67,11 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState(
-            { tasks: newTasks },
+        this.setState({
+            tasks: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
 
@@ -90,10 +93,11 @@ class Main extends React.Component {
             [source.droppableId]: taskCopy
         }
 
-        this.setState(
-            { tasks: newTasks },
+        this.setState({
+            tasks: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
     }
 
     handleCheckAll = (e) => {
@@ -110,7 +114,9 @@ class Main extends React.Component {
 
             this.setState(
                 { tasks: newTasks },
-                this.updateLocalStorage()
+                () => {
+                    this.updateLocalStorage()
+                }
             );
         })
 
@@ -133,10 +139,11 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState(
-            { tasks: newTasks },
+        this.setState({
+            tasks: newTasks
+        }, () => {
             this.updateLocalStorage()
-        );
+        });
 
     }
 
@@ -151,144 +158,143 @@ class Main extends React.Component {
                 return result;
             }, {});
 
-        this.setState(
-            { tasks: newTasks },
-            () => {
-                this.updateLocalStorage()
-                window.location.href = "/";
+        this.setState({
+            tasks: newTasks
+        }, () => {
+            this.updateLocalStorage();
+            window.location.href = "/";
+        });
+
+}
+
+toggleAddNewNote = () => {
+    this.setState({ addNewNote: !this.state.addNewNote });
+}
+
+toggleDeleteTask = () => {
+    this.setState({ deleteTask: !this.state.deleteTask });
+}
+
+getCurrentTask = (taskName) => {
+    if (this.state.currentTask === taskName) return;
+
+    this.setState({ currentTask: taskName });
+}
+
+
+renderAll = () => {
+    let key = 0;
+
+    return (
+        <main className="body">
+            <TaskHeader handleCheckAll={this.handleCheckAll} taskName={"All Tasks"} />
+
+            {/* This approach to list all the tasks is funny. Couldnt get forEach and map to work together. */}
+            {
+                Object.keys(this.state.tasks).map((task) => {
+
+                    return (
+                        this.state.tasks[task].notes.map((note, index) => {
+                            key++;
+                            return (
+                                <TaskItem
+                                    item={note}
+                                    key={key}
+                                    handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+                                    handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
+                                    handleEditItem={this.handleEditItem.bind(this, index, task)}
+                                />
+                            );
+                        })
+                    );
+
+                })
             }
-        );
 
-    }
-    
-    toggleAddNewNote = () => {
-        this.setState({ addNewNote: !this.state.addNewNote });
-    }
+        </main>
+    );
+}
 
-    toggleDeleteTask = () => {
-        this.setState({ deleteTask: !this.state.deleteTask });
-    }
+renderTask = (props) => {
+    let task = props.match.params.taskName;
+    if (!this.state.tasks[task]) return <div />;
 
-    getCurrentTask = (taskName) => {
-        if (this.state.currentTask === taskName) return;
+    return (
+        <main className="body">
+            <TaskHeader
+                taskName={this.state.tasks[task].title}
+                handleCheckAll={this.handleCheckAll}
+                toggleAddNote={this.toggleAddNewNote}
+                toggleDeleteTask={this.toggleDeleteTask}
+            />
 
-        this.setState({ currentTask: taskName });
-    }
+            <Droppable droppableId={task}>
+                {provided => (
+                    <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className="container"
+                    >
+                        {this.state.tasks[task].notes.map((note, index) => {
+                            return (
+                                <TaskItem
+                                    item={note}
+                                    key={index}
+                                    index={index}
+                                    draggableId={`${task}-${index}`}
+                                    handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+                                    handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
+                                    handleEditItem={this.handleEditItem.bind(this, index, task)}
+                                />
+                            );
+                        })}
+                        {/* {...provided.placeholder} */}
+                    </div>
+                )}
 
+            </Droppable>
 
-    renderAll = () => {
-        let key = 0;
-
-        return (
-            <main className="body">
-                <TaskHeader handleCheckAll={this.handleCheckAll} taskName={"All Tasks"} />
-
-                {/* This approach to list all the tasks is funny. Couldnt get forEach and map to work together. */}
-                {
-                    Object.keys(this.state.tasks).map((task) => {
-
-                        return (
-                            this.state.tasks[task].notes.map((note, index) => {
-                                key++;
-                                return (
-                                    <TaskItem
-                                        item={note}
-                                        key={key}
-                                        handleItemCheck={this.handleItemCheck.bind(this, index, task)}
-                                        handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
-                                        handleEditItem={this.handleEditItem.bind(this, index, task)}
-                                    />
-                                );
-                            })
-                        );
-
-                    })
-                }
-
-            </main>
-        );
-    }
-
-    renderTask = (props) => {
-        let task = props.match.params.taskName;
-        if (!this.state.tasks[task]) return <div />;
-
-        return (
-            <main className="body">
-                <TaskHeader
-                    taskName={this.state.tasks[task].title}
-                    handleCheckAll={this.handleCheckAll}
+            {this.state.addNewNote ?
+                <AddTaskItem
+                    taskName={task}
                     toggleAddNote={this.toggleAddNewNote}
+                    addNewNote={this.handleAddNewNote}
+                /> : <span />
+            }
+
+            {this.state.deleteTask ?
+                <DeleteTask
+                    taskName={task}
                     toggleDeleteTask={this.toggleDeleteTask}
-                />
+                    handleDeleteTask={this.handleDeleteTask}
+                /> :
+                <span />
+            }
 
-                <Droppable droppableId={task}>
-                    {provided => (
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                            className="container"
-                        >
-                            {this.state.tasks[task].notes.map((note, index) => {
-                                return (
-                                    <TaskItem
-                                        item={note}
-                                        key={index}
-                                        index={index}
-                                        draggableId={`${task}-${index}`}
-                                        handleItemCheck={this.handleItemCheck.bind(this, index, task)}
-                                        handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
-                                        handleEditItem={this.handleEditItem.bind(this, index, task)}
-                                    />
-                                );
-                            })}
-                            {/* {...provided.placeholder} */}
-                        </div>
-                    )}
+        </main>
+    );
+}
 
-                </Droppable>
+render() {
+    return (
+        <div className="main">
+            <Nav
+                ref="nav"
+                currentTask={this.state.currentTask}
+                getCurrentTask={this.getCurrentTask}
+            />
 
-                {this.state.addNewNote ?
-                    <AddTaskItem
-                        taskName={task}
-                        toggleAddNote={this.toggleAddNewNote}
-                        addNewNote={this.handleAddNewNote}
-                    /> : <span />
-                }
+            <DragDropContext onDragEnd={this.onItemDragEnd}>
+                <Switch>
+                    <Route exact path="/tasks" component={this.renderAll} />
+                    <Route exact path="/tasks/all" component={this.renderAll} />
+                    <Route path="/tasks/:taskName" render={props => <this.renderTask {...props} />} />
+                </Switch>
+            </DragDropContext>
 
-                {this.state.deleteTask ?
-                    <DeleteTask
-                        taskName={task}
-                        toggleDeleteTask={this.toggleDeleteTask}
-                        handleDeleteTask={this.handleDeleteTask}
-                    /> :
-                    <span />
-                }
-
-            </main>
-        );
-    }
-
-    render() {
-        return (
-            <div className="main">
-                <Nav
-                    ref="nav"
-                    currentTask={this.state.currentTask}
-                    getCurrentTask={this.getCurrentTask}
-                />
-
-                <DragDropContext onDragEnd={this.onItemDragEnd}>
-                    <Switch>
-                        <Route exact path="/tasks" component={this.renderAll} />
-                        <Route exact path="/tasks/all" component={this.renderAll} />
-                        <Route path="/tasks/:taskName" render={props => <this.renderTask {...props} />} />
-                    </Switch>
-                </DragDropContext>
-
-            </div>
-        );
-    }
+        </div>
+    );
+}
 }
 
 export default Main;
