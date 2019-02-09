@@ -23,7 +23,7 @@ const storageController = {
         let tasks, taskNames;
 
         if (!localStorage.taskNames) {
-            taskNames = ["All", "Groceries", "School", "Work", "Make Money"];
+            taskNames = ["Groceries", "School"];
         }
 
         if (!localStorage.tasks) {
