@@ -4,6 +4,7 @@
     min-width: 200px;
     box-sizing: border-box;
     color: black;
+    z-index: 2;
 }
 
 .delete-task header{

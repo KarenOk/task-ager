@@ -43,4 +43,5 @@
     margin: 10px 0;
     cursor: pointer;
     text-align: end;
+    z-index: 2;
 }

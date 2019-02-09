@@ -50,7 +50,7 @@ const storageController = {
                     notes: [
                         {
                             id: 1,
-                            note: "Note 1",
+                            note: "Grocery 1",
                             dueDate: (new Date()).toLocaleString(),
                             done: true
                         }, {
