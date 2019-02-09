@@ -21,8 +21,6 @@ class ListTasks extends React.Component {
 
         this.setState({
             editing: false
-        }, () => {
-            // window.location.reload();
         });
     }
 

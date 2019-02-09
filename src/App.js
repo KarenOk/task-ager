@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route,  Redirect} from "react-router-dom";
 import logo from "./images/logo4.svg";
 import Main from "./components/Main/Main";
+import storage from "./services/storage";
 import "./App.css";
 
 class App extends React.Component {
@@ -12,6 +13,10 @@ class App extends React.Component {
       redirect: false
     }
 
+  }
+
+  componentWillMount(){
+    storage.init();
   }
 
   handleMainMount = () => {

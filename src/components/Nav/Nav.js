@@ -1,15 +1,24 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
+import storage from "../../services/storage";
 import "./Nav.css";
 
 class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: ["All", "Groceries", "School", "Work", "Make Money"],
+            taskNames: [],
             newTask: ""
         }
+    }
+
+    componentWillMount() {
+        this.setState({ taskNames: storage.getTaskNames() });
+    }
+
+    updateLocalStorage() {
+        storage.setTaskNames(this.state.taskNames);
     }
 
     checkActive = (match, location) => {
@@ -20,42 +29,46 @@ class Nav extends React.Component {
             this.props.getCurrentTask(taskName);
             return true;
         }
-    } 
-    
-    handleNewTask = (e) => {
+    }
+
+    handleNewTaskName = (e) => {
         this.setState({
             newTask: e.target.value
         });
     }
-    
-    handleEditTask = (index, e) => {
-        const copy = [...this.state.tasks];
+
+    handleEditTaskName = (index, e) => {
+        const copy = [...this.state.taskNames];
         copy[index] = e.target.value;
-        
-        this.setState({
-            tasks: copy
-        });
+
+        this.setState(
+            { taskNames: copy },
+            this.updateLocalStorage()
+        );
     }
-    
-    handleDeleteTask = () => {       
+
+    handleDeleteTaskName = () => {
         const currentTask = this.props.currentTask;
-        const index = this.state.tasks.findIndex(task => task === currentTask);
-        const newTasks = [...this.state.tasks];
+        const index = this.state.taskNames.findIndex(task => task === currentTask);
+        const newTasks = [...this.state.taskNames];
         newTasks.splice(index, 1);
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { taskNames: newTasks },
+            this.updateLocalStorage()
+        );
 
     }
 
-    handleSaveTask = (e) => {
+    handleSaveTaskName = (e) => {
         if (e.keyCode !== 13 || !this.state.newTask) return;
 
-        this.state.tasks.splice(1, 0, this.capitalize(this.state.newTask));
-        this.setState({
-            newTask: ""
-        });
+        this.state.taskNames.splice(1, 0, this.capitalize(this.state.newTask));
+        console.log(this.state.taskNames)
+        this.setState(
+            { newTask: "" },
+            this.updateLocalStorage()
+        );
     }
 
     capitalize = (string) => {
@@ -91,15 +104,15 @@ class Nav extends React.Component {
                         placeholder="New Task"
                         type="text"
                         maxLength="20"
-                        onKeyUp={this.handleSaveTask}
-                        onChange={this.handleNewTask}
+                        onKeyUp={this.handleSaveTaskName}
+                        onChange={this.handleNewTaskName}
                         value={this.state.newTask}
                     />
                 </div>
 
                 <nav>
                     {
-                        this.state.tasks.map((task, index) => {
+                        this.state.taskNames.map((task, index) => {
                             return (
                                 <NavLink
                                     exact
@@ -109,7 +122,10 @@ class Nav extends React.Component {
                                     isActive={this.checkActive}
                                     style={{ textDecoration: "none" }}
                                 >
-                                    <ListTasks taskItem={task} handleEdit={this.handleEditTask.bind(this, index)} />
+                                    <ListTasks
+                                        taskItem={task}
+                                        handleEdit={this.handleEditTaskName.bind(this, index)}
+                                    />
                                 </NavLink>
                             );
                         })

@@ -6,6 +6,7 @@ import TaskHeader from "../TaskHeader/TaskHeader";
 import TaskItem from "../TaskItem/TaskItem";
 import AddTaskItem from "../AddTaskItem/AddTaskItem";
 import DeleteTask from "../DeleteTask/DeleteTask";
+import storage from "../../services/storage";
 import "./Main.css"
 
 class Main extends React.Component {
@@ -13,52 +14,20 @@ class Main extends React.Component {
         super(props);
 
         this.state = {
-            tasks: {
-                school: {
-                    title: "School",
-                    notes: [
-                        {
-                            id: 1,
-                            note: "Go and find something that'll fill up your stomach so you'll be healthy",
-                            dueDate: (new Date()).toLocaleString(),
-                            done: false
-                        }, {
-                            id: 2,
-                            note: "No no no no no no no no, stict to the stuff you know. If you want to be cool follow one simple rule. No no no no no no no no, stict to the stuff you know. If you want to be cool follow one simple rule.",
-                            dueDate: (new Date()).toLocaleString(),
-                            done: true
-                        }, {
-                            id: 3,
-                            note: "Yes yes yes yes yes yes yes yes, stict to the stuff you know. If you want to be cool follow one simple rule. No no no no no no no no, stict to the stuff you know. If you want to be cool follow one simple rule.",
-                            dueDate: (new Date()).toLocaleString(),
-                            done: true
-                        }
-
-                    ]
-                },
-                groceries: {
-                    title: "Groceries",
-                    notes: [
-                        {
-                            id: 1,
-                            note: "Nfjgbnmd,fm jjgjgjkr, stuff you know. If you want to be cool follow one simple rule. No no no no no no no no, stict to the stuff you know. If you want to be cool follow one simple rule.",
-                            dueDate: (new Date()).toLocaleString(),
-                            done: true
-                        }, {
-                            id: 2,
-                            note: "Go and find something that'll fill up your stomach so you'll be healthy",
-                            dueDate: (new Date()).toLocaleString(),
-                            done: false
-                        }
-                    ]
-                }
-            },
+            tasks: {},
             addNewNote: false,
             deleteTask: false,
             currentTask: ""
         }
     }
 
+    componentWillMount() {
+        this.setState({ tasks: storage.getTasks() });
+    }
+
+    updateLocalStorage() {
+        storage.setTasks(this.state.tasks);
+    }
 
     handleDeleteItem = (index, task) => {
         const copy = { ...this.state.tasks[task] }; // Spread original object into new object
@@ -68,9 +37,10 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            this.updateLocalStorage()
+        );
     }
 
     handleEditItem = (index, task, newNote) => {
@@ -81,9 +51,10 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            this.updateLocalStorage()
+        );
     }
 
     handleItemCheck = (index, task, check) => {
@@ -94,9 +65,10 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            this.updateLocalStorage()
+        );
     }
 
 
@@ -118,9 +90,10 @@ class Main extends React.Component {
             [source.droppableId]: taskCopy
         }
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            this.updateLocalStorage()
+        );
     }
 
     handleCheckAll = (e) => {
@@ -135,9 +108,10 @@ class Main extends React.Component {
                 [task]: copy
             };
 
-            this.setState({
-                tasks: newTasks
-            });
+            this.setState(
+                { tasks: newTasks },
+                this.updateLocalStorage()
+            );
         })
 
     }
@@ -159,34 +133,15 @@ class Main extends React.Component {
             [task]: copy
         }
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            this.updateLocalStorage()
+        );
 
-    }
-
-    toggleAddNewNote = () => {
-        this.setState({
-            addNewNote: !this.state.addNewNote
-        });
-    }
-
-    toggleDeleteTask = () => {
-        this.setState({
-            deleteTask: !this.state.deleteTask
-        });
-    }
-
-    getCurrentTask = (taskName) => {
-        if (this.state.currentTask === taskName) return;
-
-        this.setState({
-            currentTask: taskName
-        })
     }
 
     handleDeleteTask = (taskName) => {
-        this.refs.nav.handleDeleteTask();
+        this.refs.nav.handleDeleteTaskName();
         taskName = taskName.toLowerCase();
 
         let newTasks = Object.keys(this.state.tasks)
@@ -196,10 +151,30 @@ class Main extends React.Component {
                 return result;
             }, {});
 
-        this.setState({
-            tasks: newTasks
-        });
+        this.setState(
+            { tasks: newTasks },
+            () => {
+                this.updateLocalStorage()
+                window.location.href = "/";
+            }
+        );
+
     }
+    
+    toggleAddNewNote = () => {
+        this.setState({ addNewNote: !this.state.addNewNote });
+    }
+
+    toggleDeleteTask = () => {
+        this.setState({ deleteTask: !this.state.deleteTask });
+    }
+
+    getCurrentTask = (taskName) => {
+        if (this.state.currentTask === taskName) return;
+
+        this.setState({ currentTask: taskName });
+    }
+
 
     renderAll = () => {
         let key = 0;
