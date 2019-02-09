@@ -226,12 +226,12 @@ class Main extends React.Component {
 
     renderTask = (props) => {
         let task = props.match.params.taskName;
-        if (!this.state.tasks[task]) return <div />;
+        // if (!this.state.tasks[task]) return <div />;
 
         return (
             <main className="body">
                 <TaskHeader
-                    taskName={this.state.tasks[task].title}
+                    taskName={`${task[0]}${task.slice(1)}`}
                     handleCheckAll={this.handleCheckAll}
                     toggleAddNote={this.toggleAddNewNote}
                     toggleDeleteTask={this.toggleDeleteTask}
@@ -246,19 +246,20 @@ class Main extends React.Component {
                             className="container"
                             onClick={this.closeMenu}
                         >
-                            {this.state.tasks[task].notes.map((note, index) => {
-                                return (
-                                    <TaskItem
-                                        item={note}
-                                        key={index}
-                                        index={index}
-                                        draggableId={`${task}-${index}`}
-                                        handleItemCheck={this.handleItemCheck.bind(this, index, task)}
-                                        handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
-                                        handleEditItem={this.handleEditItem.bind(this, index, task)}
-                                    />
-                                );
-                            })}
+                            {this.state.tasks[task]?
+                                this.state.tasks[task].notes.map((note, index) => {
+                                    return (
+                                        <TaskItem
+                                            item={note}
+                                            key={index}
+                                            index={index}
+                                            draggableId={`${task}-${index}`}
+                                            handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+                                            handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
+                                            handleEditItem={this.handleEditItem.bind(this, index, task)}
+                                        />
+                                    );
+                                }) : <div />}
                             {/* {...provided.placeholder} */}
                         </div>
                     )}

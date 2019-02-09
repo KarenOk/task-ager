@@ -44,7 +44,7 @@ class Nav extends React.Component {
         this.setState({
             taskNames: copy
         }, () => {
-            this.updateLocalStorage()
+            this.updateLocalStorage();
         });
     }
 
