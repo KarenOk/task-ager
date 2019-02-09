@@ -8,36 +8,40 @@
 
 .task-header{
     padding: 30px 0;
-    justify-content: space-between;
     width: 100%;
-    max-height: 15vh;
-    min-height: 10vh;
     max-width: 1200px;
     margin: 0 auto;    
+    justify-content: space-between;
 }
 
 .task-header .left h1{
     padding: 0;
     margin: 0;
-    font-size: 40px;
+    font-size: 36px;
     color: rgb(51, 0, 129);
     text-transform: capitalize;
 }
 
 .task-header .left .icon{
-    width: 40px;
-    height: 40px;
-    padding: 15px;
+    width: 28px;
+    height: 28px;
+    padding: 10px;
+    margin: 5px;
+}
 
+.task-header .left .menu.icon{
+    display: none;
+    cursor: pointer;
 }
 
 .task-header .right {
-    width: 30%;
+    width: 40%;
+    height: auto;
 }
 
 .task-header .right > *{
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
 }
 
@@ -57,5 +61,59 @@
 .task-header .right input[type=checkbox]:checked{
     background-image: url("../../images/check.png"), linear-gradient(white 0%, #DEDEDE 100%);
     background-size: 28px;
+
+}
+
+@media screen and (max-width: 650px){
+    .task-header .left .list.icon{
+        display: none;
+    }
+
+    .task-header .left .menu.icon{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 650px){
+    .task-header .left h1{
+        font-size: 30px;
+    }
+
+    .task-header .right > *,
+    .task-header .right input[type=checkbox]{
+        width: 30px;
+        height: 30px;
+        
+    }
+
+    .task-header .right input[type=checkbox]:checked{
+        background-size: 30px;
+    }
+    
+}
+
+@media screen and (min-width: 750px){
+    .task-header .left h1{
+        font-size: 36px;
+    }
+ 
+    .task-header .left .icon, 
+    .task-header .right > *,
+    .task-header .right input[type=checkbox]{
+        width: 32px;
+        height: 32px;
+        
+    }
+
+    .task-header .right input[type=checkbox]:checked{
+        background-size: 32px;
+    }
+    
+}
+
+@media screen and (min-width: 800px){
+    .task-header .right {
+        width: 40%;
+    }
 
 }

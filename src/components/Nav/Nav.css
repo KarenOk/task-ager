@@ -1,6 +1,7 @@
 .navigator{
-    width: 40%;
-    max-width: 350px;
+    width: 100%;
+    z-index: 2;
+    max-width: 300px;
     height: 100vh;
     background-color: rgb(51, 0, 129);
     color: white;
@@ -10,6 +11,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+
 
 .navigator .logo{
     padding: 30px 0 0;
@@ -51,4 +54,30 @@
 
 .navigator input[name=new-task]:focus{
     outline: 2px solid #4735EA;
+}
+
+
+@media screen and (min-width: 900px){
+    .navigator{
+        max-width: 350px;
+    }
+}
+
+
+@media screen and (min-width: 700px){
+    .navigator{
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 650px){
+   .navigator{
+       position: fixed;
+       transform: translateX(-2000px);
+       transition: transform 0.3s ease-in-out;
+   }
+
+   .navigator.show{
+    transform: translateX(0);
+   }
 }

@@ -2,15 +2,21 @@ import React from "react";
 import "./TaskHeader.css";
 
 class TaskHeader extends React.Component {
-
     render() {
         return (
             <div className="task-header">
                 <div className="left">
                     <img
                         src={require("../../images/list-icon.png")}
-                        className="icon"
+                        className="list icon"
                         alt={this.props.task}
+                    />
+
+                    <img
+                        src={require("../../images/menu-icon.svg")}
+                        className="menu icon"
+                        alt="Menu"
+                        onClick={this.props.onMenuClick}
                     />
 
                     <h1> {this.props.taskName} </h1>

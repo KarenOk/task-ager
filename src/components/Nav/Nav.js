@@ -92,7 +92,7 @@ class Nav extends React.Component {
 
     render() {
         return (
-            <div className="navigator">
+            <div className={`navigator ${this.props.showMenu}`} >
                 <img
                     src={require("../../images/logo4.svg")}
                     className="logo"
@@ -120,6 +120,7 @@ class Nav extends React.Component {
                                     to={"/tasks/" + this.linkify(task)}
                                     key={index}
                                     activeClassName="active"
+                                    onClick={this.props.closeMenu}
                                     isActive={this.checkActive}
                                     style={{ textDecoration: "none" }}
                                 >

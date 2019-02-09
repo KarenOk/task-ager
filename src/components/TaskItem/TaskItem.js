@@ -119,6 +119,7 @@ class TaskItem extends React.Component {
                                     rows="4"
                                     autoFocus
                                     required
+                                    placeholder="Enter note here"
                                     type="text"
                                     maxLength="150"
                                     value={this.props.item.note}
