@@ -1,0 +1,43 @@
+.no-task-item {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.no-task-item *{
+    margin: 5px px;
+}
+
+.no-task-item > img{
+    width: 100%;
+    max-width: 50px;
+    margin: 0 auto;
+}
+
+.no-task-item p{
+    text-align: center;
+}
+
+.no-task-item button{
+    appearance: none;
+    cursor: pointer;
+    padding: 3px;
+    margin: 0 auto;
+    width: 40%;
+    min-width: 100px;
+    background-color: white;
+    color: rgb(51, 47, 47);
+    font-size: 0.95rem; 
+    border-radius: 10px;
+    border: 2px solid #eee;
+    box-shadow: 2px 1px 3px 3px #888;
+
+}
+
+.no-task-item button:hover{
+    font-size: 1rem; 
+    box-shadow: 2px 1px 4px 3px #888;
+
+}
