@@ -47,9 +47,10 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={this.welcomePage} />
           <Route path="/tasks" component={Main} />
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
 
-        {this.state.redirect ? <Redirect to="/tasks/groceries" /> : <div />}
+        {this.state.redirect ? <Redirect to="/tasks/all" /> : <div />}
       </div>
     );
   }
