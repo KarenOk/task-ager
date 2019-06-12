@@ -171,7 +171,6 @@ class Main extends React.Component {
     }
 
     toggleAddNewNote = () => {
-        console.log("jfbgn")
         this.setState({ addNewNote: !this.state.addNewNote });
     }
 
@@ -194,49 +193,68 @@ class Main extends React.Component {
     }
 
 
-    renderAll = () => {
-        let key = 0;
+    // renderAll = () => {
+    //     let key = 0;
 
-        return (
-            <main className="body">
-                <TaskHeader handleCheckAll={this.handleCheckAll} taskName={"All Tasks"} />
+    //     return (
+    //         <main className="body">
+    //             <TaskHeader handleCheckAll={this.handleCheckAll} noNote={false} taskName={"All Tasks"} />
 
-                {/* This approach to list all the tasks is funny. Couldnt get forEach and map to work together. */}
-                {
-                    Object.keys(this.state.tasks).map((task) => {
+    //             {/* This approach to list all the tasks is funny. Couldnt get forEach and map to work together. */}
+    //             {
+    //                 Object.keys(this.state.tasks).map((task) => {
 
-                        return (
-                            this.state.tasks[task].notes.map((note, index) => {
-                                key++;
-                                return (
-                                    <TaskItem
-                                        item={note}
-                                        key={key}
-                                        handleItemCheck={this.handleItemCheck.bind(this, index, task)}
-                                        handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
-                                        handleEditItem={this.handleEditItem.bind(this, index, task)}
-                                    />
-                                );
-                            })
-                        );
+    //                     return (
+    //                         this.state.tasks[task].notes.map((note, index) => {
+    //                             key++;
+    //                             return (
+    //                                 <TaskItem
+    //                                     item={note}
+    //                                     key={key}
+    //                                     handleItemCheck={this.handleItemCheck.bind(this, index, task)}
+    //                                     handleDeleteItem={this.handleDeleteItem.bind(this, index, task)}
+    //                                     handleEditItem={this.handleEditItem.bind(this, index, task)}
+    //                                 />
+    //                             );
+    //                         })
+    //                     );
 
-                    })
-                }
+    //                 })
+    //             }
 
-            </main>
-        );
-    }
+    //         </main>
+    //     );
+    // }
 
     renderTask = (props) => {
-        let task = props.match.params.taskName;
+        let allTasks = Object.keys(this.state.tasks);
+        
+        if (!allTasks.length) {
+            return (
+                <div className="no-tasks" >
+                    <p> No Tasks Yet. <br /> Create a New Task </p>
+                    <button onClick={this.openMenu}> Create </button>
+                </div>
+            );
+        }
 
+        let task;
+        if (this.state.tasks[props.match.params.taskName]) {
+            task = props.match.params.taskName;
+        } else {
+            task = allTasks[allTasks.length - 1];
+            window.location.href = `/tasks/${task}/`
+        }
 
         if (!this.state.tasks[task].notes.length) {
             return (
-                <main className="body no-item">
+                <main className="body no-items">
                     <NoTaskItem
                         onMenuClick={this.openMenu}
+                        taskName={task}
                         toggleAddNote={this.toggleAddNewNote}
+                        toggleDeleteTask={this.toggleDeleteTask}
+                        closeMenu={this.closeMenu}
                     />
 
                     {this.state.addNewNote ?
@@ -246,6 +264,16 @@ class Main extends React.Component {
                             addNewNote={this.handleAddNewNote}
                         /> : <span />
                     }
+
+                    {this.state.deleteTask ?
+                        <DeleteTask
+                            taskName={task}
+                            toggleDeleteTask={this.toggleDeleteTask}
+                            handleDeleteTask={this.handleDeleteTask}
+                        /> :
+                        <span />
+                    }
+
                 </main>
             );
         }
@@ -259,6 +287,7 @@ class Main extends React.Component {
                     toggleAddNote={this.toggleAddNewNote}
                     toggleDeleteTask={this.toggleDeleteTask}
                     onMenuClick={this.openMenu}
+                    noNote={false}
                 />
 
                 <Droppable droppableId={task}>
@@ -327,9 +356,10 @@ class Main extends React.Component {
 
                 <DragDropContext onDragEnd={this.onItemDragEnd}>
                     <Switch>
-                        <Route exact path="/tasks" component={this.renderAll} />
-                        <Route exact path="/tasks/all" component={this.renderAll} />
                         <Route path="/tasks/:taskName" render={props => <this.renderTask {...props} />} />
+                        {/* <Route exact path="/tasks" component={this.renderAll} /> */}
+                        {/* <Route exact path="/tasks/all" component={this.renderAll} /> */}
+                        {/* <Route render={() => <Redirect to="/" />} /> */}
                     </Switch>
                 </DragDropContext>
 
