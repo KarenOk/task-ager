@@ -9,16 +9,19 @@ class Nav extends React.Component {
         super(props);
         this.state = {
             taskNames: [],
-            newTask: ""
+            newTask: "",
+            tasks: {}
         }
     }
 
     componentWillMount() {
         this.setState({ taskNames: storage.getTaskNames() });
+        this.setState({ tasks: storage.getTasks() });
     }
 
     updateLocalStorage() {
         storage.setTaskNames(this.state.taskNames);
+        storage.setTasks(this.state.tasks);
     }
 
     checkActive = (match, location) => {
@@ -44,7 +47,7 @@ class Nav extends React.Component {
         this.setState({
             taskNames: copy
         }, () => {
-            this.updateLocalStorage()
+            this.updateLocalStorage();
         });
     }
 
@@ -63,12 +66,22 @@ class Nav extends React.Component {
 
     handleSaveTaskName = (e) => {
         if (e.keyCode !== 13 || !this.state.newTask) return;
+        let newTaskName = this.capitalize(this.state.newTask);
+        let newTaskObj = this.state.tasks;
 
-        this.state.taskNames.splice(1, 0, this.capitalize(this.state.newTask));
+        this.state.taskNames.splice(1, 0, newTaskName);
+        newTaskObj[newTaskName.toLowerCase()] = {
+            title: newTaskName,
+            notes: []
+        }
+
+        console.log(this.state.tasks);
         this.setState({
-            newTask: ""
+            newTask: "",
+            tasks: newTaskObj
         }, () => {
             this.updateLocalStorage()
+
         });
     }
 
