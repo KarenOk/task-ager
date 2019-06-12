@@ -28,6 +28,7 @@ class TaskHeader extends React.Component {
                         type="checkbox"
                         name="select-all"
                         className="select-all"
+                        hidden={this.props.noNote}
                         title="Check All"
                         onChange={this.props.handleCheckAll}
                     />
