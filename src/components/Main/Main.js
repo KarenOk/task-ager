@@ -6,6 +6,7 @@ import TaskHeader from "../TaskHeader/TaskHeader";
 import TaskItem from "../TaskItem/TaskItem";
 import AddTaskItem from "../AddTaskItem/AddTaskItem";
 import DeleteTask from "../DeleteTask/DeleteTask";
+import NoTaskItem from "../NoTaskItem/NoTaskItem";
 import storage from "../../services/storage";
 import "./Main.css"
 
@@ -28,6 +29,7 @@ class Main extends React.Component {
 
     updateLocalStorage() {
         storage.setTasks(this.state.tasks);
+        this.setState({ tasks: storage.getTasks() });
     }
 
     handleDeleteItem = (index, task) => {
@@ -169,6 +171,7 @@ class Main extends React.Component {
     }
 
     toggleAddNewNote = () => {
+        console.log("jfbgn")
         this.setState({ addNewNote: !this.state.addNewNote });
     }
 
@@ -226,7 +229,27 @@ class Main extends React.Component {
 
     renderTask = (props) => {
         let task = props.match.params.taskName;
-        // if (!this.state.tasks[task]) return <div />;
+
+
+        if (!this.state.tasks[task].notes.length) {
+            return (
+                <main className="body no-item">
+                    <NoTaskItem
+                        onMenuClick={this.openMenu}
+                        toggleAddNote={this.toggleAddNewNote}
+                    />
+
+                    {this.state.addNewNote ?
+                        <AddTaskItem
+                            taskName={task}
+                            toggleAddNote={this.toggleAddNewNote}
+                            addNewNote={this.handleAddNewNote}
+                        /> : <span />
+                    }
+                </main>
+            );
+        }
+
 
         return (
             <main className="body">
@@ -246,7 +269,7 @@ class Main extends React.Component {
                             className="container"
                             onClick={this.closeMenu}
                         >
-                            {this.state.tasks[task]?
+                            {this.state.tasks[task].notes ?
                                 this.state.tasks[task].notes.map((note, index) => {
                                     return (
                                         <TaskItem
@@ -259,7 +282,9 @@ class Main extends React.Component {
                                             handleEditItem={this.handleEditItem.bind(this, index, task)}
                                         />
                                     );
-                                }) : <div />}
+                                }) :
+                                <div />
+                            }
                             {/* {...provided.placeholder} */}
                         </div>
                     )}
@@ -289,7 +314,9 @@ class Main extends React.Component {
 
     render() {
         return (
+
             <div className="main">
+
                 <Nav
                     ref="nav"
                     currentTask={this.state.currentTask}
@@ -306,7 +333,8 @@ class Main extends React.Component {
                     </Switch>
                 </DragDropContext>
 
-            </div>
+
+            </div >
         );
     }
 }
