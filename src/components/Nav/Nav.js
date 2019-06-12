@@ -75,12 +75,12 @@ class Nav extends React.Component {
             notes: []
         }
 
-        console.log(this.state.tasks);
         this.setState({
             newTask: "",
             tasks: newTaskObj
         }, () => {
-            this.updateLocalStorage()
+            this.updateLocalStorage();
+            window.location.href = `/tasks/${newTaskName.toLowerCase()}`
 
         });
     }
