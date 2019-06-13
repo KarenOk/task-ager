@@ -70,7 +70,7 @@ class Nav extends React.Component {
         let newTaskObj = this.state.tasks;
 
         this.state.taskNames.splice(1, 0, newTaskName);
-        newTaskObj[newTaskName.toLowerCase()] = {
+        newTaskObj[this.linkify(newTaskName)] = {
             title: newTaskName,
             notes: []
         }
@@ -80,7 +80,7 @@ class Nav extends React.Component {
             tasks: newTaskObj
         }, () => {
             this.updateLocalStorage();
-            window.location.href = `/tasks/${newTaskName.toLowerCase()}`
+            window.location.href = `/tasks/${this.linkify(newTaskName)}`
 
         });
     }

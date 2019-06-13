@@ -179,6 +179,7 @@ class Main extends React.Component {
     }
 
     openMenu = () => {
+        console.log("fjhbfn")
         this.setState({ showMenu: true });
     }
 
@@ -228,7 +229,7 @@ class Main extends React.Component {
 
     renderTask = (props) => {
         let allTasks = Object.keys(this.state.tasks);
-        
+
         if (!allTasks.length) {
             return (
                 <div className="no-tasks" >
@@ -239,11 +240,12 @@ class Main extends React.Component {
         }
 
         let task;
+        console.log(props.match.params.taskName);
         if (this.state.tasks[props.match.params.taskName]) {
             task = props.match.params.taskName;
         } else {
             task = allTasks[allTasks.length - 1];
-            window.location.href = `/tasks/${task}/`
+            window.location.href = `/tasks/${task}/`;
         }
 
         if (!this.state.tasks[task].notes.length) {
@@ -278,9 +280,17 @@ class Main extends React.Component {
             );
         }
 
+        let manageMenuForTaskItems = (e) => {
+            if (e.target.className === "menu icon") {
+                this.openMenu();
+            } else {
+                this.closeMenu();
+            }
+            
+        }
 
         return (
-            <main className="body">
+            <main className="body" onClick={manageMenuForTaskItems}>
                 <TaskHeader
                     taskName={`${task[0]}${task.slice(1)}`}
                     handleCheckAll={this.handleCheckAll}
@@ -296,7 +306,6 @@ class Main extends React.Component {
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                             className="container"
-                            onClick={this.closeMenu}
                         >
                             {this.state.tasks[task].notes ?
                                 this.state.tasks[task].notes.map((note, index) => {

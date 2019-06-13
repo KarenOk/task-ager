@@ -10,7 +10,10 @@ class NoTaskItem extends React.Component {
     }
 
     closeMenu = (e) => {
-        if (e.target.className !== "task-header") {
+        console.log(e.target.className)
+        if (e.target.className === "menu icon") {
+            this.props.onMenuClick();
+        } else {
             this.props.closeMenu();
         }
 
