@@ -2,4 +2,7 @@
 
 Still in Development!
 
-Click [here](https://task-ager.netlify.app/) for a preview. 
+[Click here](https://task-ager.netlify.app/) for a preview. 
+
+# Demo
+![Demo](./demo.gif)
