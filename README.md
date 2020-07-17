@@ -2,4 +2,4 @@
 
 Still in Development!
 
-Click [here](https://task-ager.herokuapp.com) for a preview. 
+Click [here](https://task-ager.netlify.app/) for a preview. 
