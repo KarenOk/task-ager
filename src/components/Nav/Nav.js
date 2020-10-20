@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
 import storage from "../../services/storage";
 import { capitalize, linkify, unlinkify } from "../../services/utils.js";
+import history from "../../services/history";
 import "./Nav.css";
 
 class Nav extends React.Component {
@@ -36,27 +37,33 @@ class Nav extends React.Component {
 	};
 
 	handleNewTaskName = e => {
-		if (RegExp(/^[a-zA-Z0-9 ]+$/).test(e.target.value)) {
+		if (RegExp(/^[a-zA-Z0-9 ]*$/).test(e.target.value)) {
 			this.setState({
 				newTask: e.target.value
 			});
 		}
 	};
 
-	handleEditTaskName = (index, e) => {
-		if (RegExp(/^[a-zA-Z0-9 ]+$/).test(e.target.value)) {
-			const copy = [...this.state.taskNames];
-			copy[index] = e.target.value;
+	handleEditTaskName = (index, newTaskName) => {
+		const taskNames = [...this.state.taskNames];
+		const formerKey = linkify(taskNames[index]);
+		taskNames[index] = newTaskName;
 
-			this.setState(
-				{
-					taskNames: copy
-				},
-				() => {
-					this.updateLocalStorage();
-				}
-			);
-		}
+		// change key to new name in tasks object
+		const tasks = { ...this.state.tasks };
+		tasks[linkify(newTaskName)] = tasks[formerKey];
+		delete tasks[formerKey];
+
+		this.setState(
+			{
+				taskNames,
+				tasks
+			},
+			() => {
+				this.updateLocalStorage();
+				window.location.href = `/tasks/${linkify(newTaskName)}`;
+			}
+		);
 	};
 
 	handleDeleteTaskName = () => {
@@ -105,7 +112,8 @@ class Nav extends React.Component {
 				<div className="add-task">
 					<input
 						name="new-task"
-						placeholder="New Task"
+						placeholder="New Task Collection"
+						aria-label="Add a new task collection"
 						type="text"
 						maxLength="20"
 						onKeyUp={this.handleSaveTaskName}
@@ -126,7 +134,7 @@ class Nav extends React.Component {
 								isActive={this.checkActive}
 								style={{ textDecoration: "none" }}
 							>
-								<ListTasks taskItem={task} handleEdit={this.handleEditTaskName.bind(this, index)} />
+								<ListTasks taskName={task} handleEdit={this.handleEditTaskName.bind(this, index)} />
 							</NavLink>
 						);
 					})}
