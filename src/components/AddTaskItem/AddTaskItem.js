@@ -38,7 +38,6 @@ class AddTaskItem extends React.Component {
 	};
 
 	handleDateChange = date => {
-		console.log(date);
 		this.setState(
 			{
 				dueDate: date
