@@ -48,3 +48,15 @@
 		transform: translate3d(4px, 3px, 0);
 	}
 }
+
+.toast-info {
+	background-color: #3499db !important;
+}
+
+.toast {
+	color: white !important;
+	min-width: 250px;
+	width: 30vw;
+	min-height: 30px !important;
+	justify-content: center;
+}
