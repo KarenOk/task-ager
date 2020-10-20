@@ -48,13 +48,13 @@ const storageController = {
 					notes: [
 						{
 							id: 1,
-							note: "Grocery 1",
+							note: "Get some almond milk.",
 							dueDate: new Date(),
 							done: true
 						},
 						{
 							id: 2,
-							note: "Go and find something that'll fill up your stomach so you'll be healthy",
+							note: "Get orange juice.",
 							dueDate: new Date(),
 							done: false
 						}
