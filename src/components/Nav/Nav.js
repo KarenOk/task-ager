@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
 import storage from "../../services/storage";
 import { capitalize, linkify, unlinkify } from "../../services/utils.js";
-import history from "../../services/history";
 import "./Nav.css";
 
 class Nav extends React.Component {
