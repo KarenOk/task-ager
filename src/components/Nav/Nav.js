@@ -44,17 +44,19 @@ class Nav extends React.Component {
 	};
 
 	handleEditTaskName = (index, e) => {
-		const copy = [...this.state.taskNames];
-		copy[index] = e.target.value;
+		if (RegExp(/^[a-zA-Z0-9 ]+$/).test(e.target.value)) {
+			const copy = [...this.state.taskNames];
+			copy[index] = e.target.value;
 
-		this.setState(
-			{
-				taskNames: copy
-			},
-			() => {
-				this.updateLocalStorage();
-			}
-		);
+			this.setState(
+				{
+					taskNames: copy
+				},
+				() => {
+					this.updateLocalStorage();
+				}
+			);
+		}
 	};
 
 	handleDeleteTaskName = () => {
