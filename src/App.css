@@ -1,48 +1,50 @@
 .app {
-  min-height: 100vh;
-  display: flex;
-  font-family: 'Averia Libre', cursive;
-
+	min-height: 100vh;
+	display: flex;
+	font-family: "Averia Libre", sans-serif;
 }
 
-.welcome-page{
-  background-color: #222;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.welcome-page {
+	background-color: #222;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .welcome-page > .logo {
-  /* animation: app-logo-shake infinite 2s cubic-bezier(.36,.07,.19,.97) both; */
-  animation: logo-animation 3s forwards;
-  width:70%;
+	/* animation: app-logo-shake infinite 2s cubic-bezier(.36,.07,.19,.97) both; */
+	animation: logo-animation 3s forwards;
+	width: 70%;
 }
 
 @keyframes logo-animation {
-  0% {
-      transform: scale(1, 1);
-  }
-  40% {
-      transform: scale(1.2, 1.2);
-  }
-  70% {
-      transform: scale(1, 1);
-  }
-  85% {
-      transform: scale(1.15, 1.15);
-  }
-  90% {
-    transform: scale(1, 1);
-  }
-  93%, 92% {
-    transform: translate3d(2px, -6px, 0);
-  }
-  91%, 96%, 99% {
-    transform: translate3d(-4px, 1px, 0);
-  }
-  94%, 100% {
-    transform: translate3d(4px, 3px, 0);
-  }
-
+	0% {
+		transform: scale(1, 1);
+	}
+	40% {
+		transform: scale(1.2, 1.2);
+	}
+	70% {
+		transform: scale(1, 1);
+	}
+	85% {
+		transform: scale(1.15, 1.15);
+	}
+	90% {
+		transform: scale(1, 1);
+	}
+	93%,
+	92% {
+		transform: translate3d(2px, -6px, 0);
+	}
+	91%,
+	96%,
+	99% {
+		transform: translate3d(-4px, 1px, 0);
+	}
+	94%,
+	100% {
+		transform: translate3d(4px, 3px, 0);
+	}
 }
