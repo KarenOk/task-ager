@@ -114,7 +114,7 @@ class Nav extends React.Component {
 						placeholder="New Task Collection"
 						aria-label="Add a new task collection"
 						type="text"
-						maxLength="20"
+						maxLength="15"
 						onKeyUp={this.handleSaveTaskName}
 						onChange={this.handleNewTaskName}
 						value={this.state.newTask}

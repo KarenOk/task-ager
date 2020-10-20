@@ -55,7 +55,7 @@ class ListTasks extends React.Component {
 						className="edit-task"
 						value={this.state.taskName}
 						type="text"
-						maxLength="20"
+						maxLength="15"
 						onChange={this.handleChange}
 						onKeyUp={this.stopEdit}
 						onBlur={() => this.stopEdit({})}

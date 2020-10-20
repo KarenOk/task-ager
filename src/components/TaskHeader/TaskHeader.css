@@ -1,119 +1,119 @@
-.task-header, 
+.task-header,
 .task-header .right,
-.task-header .left{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+.task-header .left {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
-.task-header{
-    padding: 30px 0;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;    
-    justify-content: space-between;
+.task-header {
+	padding: 30px 0 15px;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
-.task-header .left h1{
-    padding: 0;
-    margin: 0;
-    font-size: 36px;
-    color: rgb(51, 0, 129);
-    text-transform: capitalize;
+.task-header .left {
+	margin-bottom: 10px;
 }
 
-.task-header .left .icon{
-    width: 28px;
-    height: 28px;
-    padding: 10px;
-    margin: 5px;
+.task-header .left h1 {
+	padding: 0;
+	margin: 0;
+	font-size: 36px;
+	color: rgb(51, 0, 129);
+	text-transform: capitalize;
 }
 
-.task-header .left .menu.icon{
-    display: none;
-    cursor: pointer;
+.task-header .left .icon {
+	width: 28px;
+	height: 28px;
+	padding: 10px;
+	margin: 5px;
+}
+
+.task-header .left .menu.icon {
+	display: none;
+	cursor: pointer;
 }
 
 .task-header .right {
-    width: 40%;
-    height: auto;
+	width: 40%;
+	height: auto;
+	margin-left: 25px;
 }
 
-.task-header .right > *{
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
+.task-header .right > * {
+	width: 28px;
+	height: 28px;
+	margin: 10px;
+	cursor: pointer;
 }
 
-.task-item input[type=checkbox],
-.task-header .right input[type=checkbox]{
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #DEDEDE;
-    box-shadow: 0 0 5px rgb(51, 0, 129, 0.6);
-    background-image: linear-gradient(white 0%, #DEDEDE 100%);
-    border-radius: 2px;
-    
+.task-item input[type="checkbox"],
+.task-header .right input[type="checkbox"] {
+	appearance: none;
+	min-width: 30px;
+	height: 30px;
+	border: 1px solid #dedede;
+	box-shadow: 0 0 5px rgb(51, 0, 129, 0.6);
+	background-image: linear-gradient(white 0%, #dedede 100%);
+	border-radius: 2px;
 }
 
-.task-item input[type=checkbox]:checked,
-.task-header .right input[type=checkbox]:checked{
-    background-image: url("../../images/check.png"), linear-gradient(white 0%, #DEDEDE 100%);
-    background-size: 28px;
-
+.task-item input[type="checkbox"]:checked,
+.task-header .right input[type="checkbox"]:checked {
+	background-image: url("../../images/check.png"), linear-gradient(white 0%, #dedede 100%);
+	background-size: 28px;
 }
 
-@media screen and (max-width: 650px){
-    .task-header .left .list.icon{
-        display: none;
-    }
+@media screen and (max-width: 650px) {
+	.task-header .left .list.icon {
+		display: none;
+	}
 
-    .task-header .left .menu.icon{
-        display: block;
-    }
+	.task-header .left .menu.icon {
+		display: block;
+	}
 }
 
-@media screen and (min-width: 650px){
-    .task-header .left h1{
-        font-size: 30px;
-    }
+@media screen and (min-width: 650px) {
+	.task-header .left h1 {
+		font-size: 30px;
+	}
 
-    .task-header .right > *,
-    .task-header .right input[type=checkbox]{
-        width: 30px;
-        height: 30px;
-        
-    }
+	.task-header .right > *,
+	.task-header .right input[type="checkbox"] {
+		width: 30px;
+		height: 30px;
+	}
 
-    .task-header .right input[type=checkbox]:checked{
-        background-size: 30px;
-    }
-    
+	.task-header .right input[type="checkbox"]:checked {
+		background-size: 30px;
+	}
 }
 
-@media screen and (min-width: 750px){
-    .task-header .left h1{
-        font-size: 36px;
-    }
- 
-    .task-header .left .icon, 
-    .task-header .right > *,
-    .task-header .right input[type=checkbox]{
-        width: 32px;
-        height: 32px;
-        
-    }
+@media screen and (min-width: 750px) {
+	.task-header .left h1 {
+		font-size: 36px;
+	}
 
-    .task-header .right input[type=checkbox]:checked{
-        background-size: 32px;
-    }
-    
+	.task-header .left .icon,
+	.task-header .right > *,
+	.task-header .right input[type="checkbox"] {
+		width: 32px;
+		height: 32px;
+	}
+
+	.task-header .right input[type="checkbox"]:checked {
+		background-size: 32px;
+	}
 }
 
-@media screen and (min-width: 800px){
-    .task-header .right {
-        width: 40%;
-    }
-
+@media screen and (min-width: 800px) {
+	.task-header .right {
+		width: 40%;
+	}
 }
