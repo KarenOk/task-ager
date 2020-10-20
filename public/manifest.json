@@ -1,15 +1,14 @@
 {
-  "short_name": "TASK-ager",
-  "name": "TASK Manager",
-  "icons": [
-    {
-      "src": "logo.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/svg"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ddd"
+	"short_name": "TASK-ager",
+	"name": "TASK-ager: The Task Manager",
+	"icons": [
+		{
+			"src": "./logo.svg",
+			"type": "image/svg"
+		}
+	],
+	"start_url": "./index.html",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ddd"
 }
