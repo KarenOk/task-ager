@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import ListTasks from "../ListTasks/ListTasks";
 import storage from "../../services/storage";
+import { capitalize, linkify, unlinkify } from "../../services/utils.js";
 import "./Nav.css";
 
 class Nav extends React.Component {
@@ -28,7 +29,7 @@ class Nav extends React.Component {
 		if (!match) return false;
 
 		if (match.url === location.pathname) {
-			let taskName = this.capitalize(this.unlinkify(match.url));
+			let taskName = capitalize(unlinkify(match.url));
 			this.props.getCurrentTask(taskName);
 			return true;
 		}
@@ -73,11 +74,11 @@ class Nav extends React.Component {
 
 	handleSaveTaskName = e => {
 		if (e.keyCode !== 13 || !this.state.newTask) return;
-		let newTaskName = this.capitalize(this.state.newTask);
+		let newTaskName = capitalize(this.state.newTask);
 		let newTaskObj = this.state.tasks;
 
 		this.state.taskNames.splice(1, 0, newTaskName);
-		newTaskObj[this.linkify(newTaskName)] = {
+		newTaskObj[linkify(newTaskName)] = {
 			title: newTaskName,
 			notes: []
 		};
@@ -89,33 +90,9 @@ class Nav extends React.Component {
 			},
 			() => {
 				this.updateLocalStorage();
-				window.location.href = `/tasks/${this.linkify(newTaskName)}`;
+				window.location.href = `/tasks/${linkify(newTaskName)}`;
 			}
 		);
-	};
-
-	capitalize = string => {
-		let newString = "";
-		string.split(" ").forEach(word => {
-			newString += word.charAt(0).toUpperCase() + word.slice(1) + " ";
-		});
-
-		return newString.trim();
-	};
-
-	linkify = taskName => {
-		return taskName
-			.split(" ")
-			.map(item => item.toLowerCase())
-			.join("-");
-	};
-
-	unlinkify = taskName => {
-		let splitLink = taskName.split("/");
-		return splitLink[splitLink.length - 1]
-			.split("-")
-			.map(item => item.toLowerCase())
-			.join(" ");
 	};
 
 	render() {
@@ -140,7 +117,7 @@ class Nav extends React.Component {
 						return (
 							<NavLink
 								exact
-								to={"/tasks/" + this.linkify(task)}
+								to={"/tasks/" + linkify(task)}
 								key={index}
 								activeClassName="active"
 								onClick={this.props.closeMenu}
