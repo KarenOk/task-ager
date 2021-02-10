@@ -3,7 +3,7 @@
 	"name": "TASK-ager: The Task Manager",
 	"icons": [
 		{
-			"src": "./logo.png",
+			"src": "./logo-bare.png",
 			"type": "image/png"
 		}
 	],
